@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>EmployeeConsole_WebAPIs</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EmployeeConsole.BLL\bin\**" />
+    <Compile Remove="EmployeeConsole.BLL\obj\**" />
+    <Compile Remove="EmployeeConsole.DAL\bin\**" />
+    <Compile Remove="EmployeeConsole.DAL\obj\**" />
+    <Compile Remove="EmployeeConsole.Models\bin\**" />
+    <Compile Remove="EmployeeConsole.Models\obj\**" />
+    <Content Remove="EmployeeConsole.BLL\bin\**" />
+    <Content Remove="EmployeeConsole.BLL\obj\**" />
+    <Content Remove="EmployeeConsole.DAL\bin\**" />
+    <Content Remove="EmployeeConsole.DAL\obj\**" />
+    <Content Remove="EmployeeConsole.Models\bin\**" />
+    <Content Remove="EmployeeConsole.Models\obj\**" />
+    <EmbeddedResource Remove="EmployeeConsole.BLL\bin\**" />
+    <EmbeddedResource Remove="EmployeeConsole.BLL\obj\**" />
+    <EmbeddedResource Remove="EmployeeConsole.DAL\bin\**" />
+    <EmbeddedResource Remove="EmployeeConsole.DAL\obj\**" />
+    <EmbeddedResource Remove="EmployeeConsole.Models\bin\**" />
+    <EmbeddedResource Remove="EmployeeConsole.Models\obj\**" />
+    <None Remove="EmployeeConsole.BLL\bin\**" />
+    <None Remove="EmployeeConsole.BLL\obj\**" />
+    <None Remove="EmployeeConsole.DAL\bin\**" />
+    <None Remove="EmployeeConsole.DAL\obj\**" />
+    <None Remove="EmployeeConsole.Models\bin\**" />
+    <None Remove="EmployeeConsole.Models\obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+</Project>

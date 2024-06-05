@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeConsole-WebAPIs", "EmployeeConsole-WebAPIs.csproj", "{A3C3FA6D-AA74-4CFB-9769-96BB19877C19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.WebApi", "Employee.WebApi.csproj", "{A3C3FA6D-AA74-4CFB-9769-96BB19877C19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeConsole.BLL", "EmployeeConsole.BLL\EmployeeConsole.BLL.csproj", "{27D81753-7B4B-4740-A6D1-067D6628E44C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.WebApi.BLL", "EmployeeConsole.BLL\Employee.WebApi.BLL.csproj", "{27D81753-7B4B-4740-A6D1-067D6628E44C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeConsole.DAL", "EmployeeConsole.DAL\EmployeeConsole.DAL.csproj", "{1CE9CB0B-2A3A-46CF-869F-508784E4B9DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.WebApi.DAL", "EmployeeConsole.DAL\Employee.WebApi.DAL.csproj", "{1CE9CB0B-2A3A-46CF-869F-508784E4B9DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeConsole.Models", "EmployeeConsole.Models\EmployeeConsole.Models.csproj", "{BD21FB67-B4EC-4799-8F82-008A5A6E3194}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employee.WebApi.Models", "EmployeeConsole.Models\Employee.WebApi.Models.csproj", "{BD21FB67-B4EC-4799-8F82-008A5A6E3194}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
