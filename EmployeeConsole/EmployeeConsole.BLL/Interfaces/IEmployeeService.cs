@@ -7,8 +7,8 @@ namespace Employee.WebApi.BLL.Interfaces
         public bool AddEmployee(EmployeeDTO employeeDto);
         public List<EmployeeDTO> DisplayEmployees();
         public bool UpdateEmployeeDetails(EmployeeDTO employee);
-        public EmployeeDTO DisplayEmpDetails(int employeeId);
+        public EmployeeDTO DisplayEmpDetails(string employeeId);
         public List<EmployeeDTO> DisplayEmpDetails(string firstName, string lastName);
-        public bool DeleteEmployee(int employeeId);
+        public bool DeleteEmployee(string employeeId);
     }
 }

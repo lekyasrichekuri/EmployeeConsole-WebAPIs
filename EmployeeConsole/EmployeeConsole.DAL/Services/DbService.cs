@@ -1,5 +1,5 @@
 ﻿using Employee.WebApi.DAL.Interfaces;
-using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Model;
+using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
 namespace Employee.WebApi.DAL.Services
 {
     public class DbService : IDbService
@@ -21,15 +21,22 @@ namespace Employee.WebApi.DAL.Services
         {
             try
             {
-                var employeeToUpdate = _context.Employees.Find(employee.EmployeeId);
+                var employeeToUpdate = _context.Employees.FirstOrDefault(e => e.EmployeeId == employee.EmployeeId);
 
                 if (employeeToUpdate != null)
                 {
+                    employeeToUpdate.EmployeeId = employee.EmployeeId;
                     employeeToUpdate.FirstName = employee.FirstName;
                     employeeToUpdate.LastName = employee.LastName;
                     employeeToUpdate.Email = employee.Email;
-                    employeeToUpdate.PhoneNumber = employee.PhoneNumber;
-                    employeeToUpdate.Manager = employee.Manager;
+                    employeeToUpdate.PhoneNumber= employee.PhoneNumber;
+                    employeeToUpdate.DateOfBirth = employee.DateOfBirth;
+                    employeeToUpdate.RoleDepartmentLocationId = employee.RoleDepartmentLocationId;
+                    employeeToUpdate.JoiningDate= employee.JoiningDate;
+                    employeeToUpdate.ProfileImage= employee.ProfileImage;
+                    employeeToUpdate.ManagerId= employee.ManagerId;
+                    employeeToUpdate.ProjectId= employee.ProjectId;
+                    employeeToUpdate.StatusId= employee.StatusId;
                     _context.SaveChanges();
                     return true;
                 }
@@ -45,7 +52,7 @@ namespace Employee.WebApi.DAL.Services
             }
         }
 
-        public Employeee DisplayEmployeeDetails(int employeeId)
+        public Employeee DisplayEmployeeDetails(string employeeId)
         {
             try
             {
@@ -76,18 +83,7 @@ namespace Employee.WebApi.DAL.Services
                      e.FirstName.ToUpper().Contains(firstName.ToUpper()) ||
                      e.LastName.ToUpper().Contains(lastName.ToUpper()))
                 .ToList();
-                List<Employeee> employ=new List<Employeee>();
-                foreach(var employee in employees)
-                {
-                    var emp = new Employeee
-                    {
-                        EmployeeId=employee.EmployeeId,
-                        Email=employee.Email,
-                        Manager=employee.Manager,
-                    };
-                    employ.Add(emp);
-                }
-                return employ;
+                return employees;
             }
             catch (Exception e)
             {
@@ -97,7 +93,7 @@ namespace Employee.WebApi.DAL.Services
         }
 
 
-        public bool DeleteEmployee(int employeeId)
+        public bool DeleteEmployee(string employeeId)
         {
             try
             {
@@ -150,28 +146,96 @@ namespace Employee.WebApi.DAL.Services
             }
         }
 
+        public bool AddRoleDeptLoc(Role role)
+        {
+            try
+            {
+                var existingRole = _context.Roles.FirstOrDefault(r => r.RoleName == role.RoleName);
+                if (existingRole == null)
+                {
+                    _context.Roles.Add(role);
+                    _context.SaveChanges(); 
+                }
+                else
+                {
+                    role.Id = existingRole.Id;
+                }
+                foreach (var roleDepartmentLocation in role.RoleDepartmentLocations)
+                {
+                    var existingRDL = _context.RoleDepartmentLocations
+                                            .FirstOrDefault(rdl => rdl.RoleId == role.Id &&
+                                                                     rdl.DepartmentId == roleDepartmentLocation.DepartmentId &&
+                                                                     rdl.LocationId == roleDepartmentLocation.LocationId);
+
+                    if (existingRDL == null)
+                    {
+                        roleDepartmentLocation.RoleId = role.Id;
+                        _context.RoleDepartmentLocations.Add(roleDepartmentLocation);
+                    }
+                }
+
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Inner exception: {ex.InnerException?.Message}");
+                return false;
+            }
+        }
+
+
+
+
         public bool AddRole(Role role)
         {
             try
             {
-                Role r = new Role();
-                r.RoleName=role.RoleName;
-                _context.Roles.Add(role);
-                RoleDepartmentLocation roleDepartmentLocation = new RoleDepartmentLocation();
-                roleDepartmentLocation.RoleId = role.Id;
-                roleDepartmentLocation.DepartmentId = role.DepartmentId;
-                roleDepartmentLocation.RoleDescription = role.RoleDescription;
-                roleDepartmentLocation.LocationId = role.LocationId;
-                _context.RoleDepartmentLocations.Add(roleDepartmentLocation);
+                if (!role.RoleDepartmentLocations.Any())
+                {
+                    Console.WriteLine("RoleDepartmentLocations collection is empty.");
+                    return false;
+                }
+
+                var firstRoleDepartmentLocation = role.RoleDepartmentLocations.First();
+
+                var departmentExists = _context.Departments.Any(d => d.Id == firstRoleDepartmentLocation.DepartmentId);
+                var locationExists = _context.Locations.Any(l => l.Id == firstRoleDepartmentLocation.LocationId);
+
+                if (!departmentExists || !locationExists)
+                {
+                    Console.WriteLine("Department or Location does not exist.");
+                    return false;
+                }
+
+                var roleName = _context.Employees.Find(role.RoleName);
+                if(roleName==null)
+                {
+                    _context.Roles.Add(role);
+                    _context.SaveChanges();
+                }
+
+                foreach (var roleDepartmentLocation in role.RoleDepartmentLocations)
+                {
+                    roleDepartmentLocation.RoleId = role.Id;
+                    _context.RoleDepartmentLocations.Add(roleDepartmentLocation);
+                }
                 _context.SaveChanges();
+
                 return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred while adding the Role: {e.Message}");
-                return false;
+                Console.WriteLine($"AutoMapper error: {ex.Message}");
+                Console.WriteLine($"Inner exception: {ex.InnerException?.Message}");
+                return false; 
             }
         }
+
+
+
 
         public bool IsEntityExists<TEntity>(Func<TEntity, bool> predicate, string entityName) where TEntity : class
         {

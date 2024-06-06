@@ -20,5 +20,5 @@ public partial class RoleDTO
     public string RoleDescription { get; set; }
 
     [Required]
-    public int IsDeleted { get; set; }
+    public bool IsDeleted { get; set; }
 }

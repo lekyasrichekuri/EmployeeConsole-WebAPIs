@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Model;
+namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
 
 public partial class LekyaDbContext : DbContext
 {
@@ -49,11 +49,14 @@ public partial class LekyaDbContext : DbContext
 
         modelBuilder.Entity<Employeee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF13C0EC6F3");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF17FC84C87");
 
             entity.ToTable("Employee");
 
-            entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+            entity.Property(e => e.EmployeeId)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("EmployeeID");
             entity.Property(e => e.DateOfBirth)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -69,6 +72,9 @@ public partial class LekyaDbContext : DbContext
             entity.Property(e => e.LastName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.ManagerId)
+                .HasMaxLength(10)
+                .IsUnicode(false);
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(10)
                 .IsUnicode(false);
@@ -77,20 +83,20 @@ public partial class LekyaDbContext : DbContext
 
             entity.HasOne(d => d.Manager).WithMany(p => p.InverseManager)
                 .HasForeignKey(d => d.ManagerId)
-                .HasConstraintName("FK__Employee__Manage__2BC97F7C");
+                .HasConstraintName("FK__Employee__Manage__39237A9A");
 
             entity.HasOne(d => d.Project).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.ProjectId)
-                .HasConstraintName("FK__Employee__Projec__2AD55B43");
+                .HasConstraintName("FK__Employee__Projec__382F5661");
 
             entity.HasOne(d => d.RoleDepartmentLocation).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.RoleDepartmentLocationId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Employee__RoleDe__29E1370A");
+                .HasConstraintName("FK__Employee__RoleDe__373B3228");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.StatusId)
-                .HasConstraintName("FK__Employee__Status__28ED12D1");
+                .HasConstraintName("FK__Employee__Status__36470DEF");
         });
 
         modelBuilder.Entity<Location>(entity =>

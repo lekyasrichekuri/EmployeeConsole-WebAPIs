@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Model;
+namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
 
 public partial class Employeee
 {
-    public int EmployeeId { get; set; }
+    public string EmployeeId { get; set; } = null!;
 
     public string FirstName { get; set; } = null!;
 
@@ -23,7 +23,7 @@ public partial class Employeee
 
     public int RoleDepartmentLocationId { get; set; }
 
-    public int? ManagerId { get; set; }
+    public string? ManagerId { get; set; }
 
     public int? ProjectId { get; set; }
 

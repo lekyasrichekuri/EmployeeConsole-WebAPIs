@@ -28,7 +28,7 @@ namespace Employee.WebApi.Controllers
 
         // GET api/Employee/5
         [HttpGet("{id}")]
-        public ActionResult<EmployeeDTO> GetEmployeeById(int id)
+        public ActionResult<EmployeeDTO> GetEmployeeById(string id)
         {
             var employee = _employeeService.DisplayEmpDetails(id);
             if (employee == null)
@@ -64,10 +64,13 @@ namespace Employee.WebApi.Controllers
         [HttpPost]
         public ActionResult<string> AddEmployee(EmployeeDTO employee)
         {
-            _employeeService.AddEmployee(employee);
-            return Ok("Employee added successfully");
+            var success = _employeeService.AddEmployee(employee);
+            if (success)
+                return Ok("Employee added successfully");
+            else
+                return BadRequest("Employee not added successfully");
         }
-
+        
         // PUT api/Employee/5
         [HttpPut("{id}")]
         public ActionResult<string> UpdateEmployee(string id, EmployeeDTO employee)
@@ -81,7 +84,7 @@ namespace Employee.WebApi.Controllers
 
         // DELETE api/Employee/5
         [HttpDelete("{id}")]
-        public ActionResult<string> DeleteEmployee(int id)
+        public ActionResult<string> DeleteEmployee(string id)
         {
             var success = _employeeService.DeleteEmployee(id);
             if (success)

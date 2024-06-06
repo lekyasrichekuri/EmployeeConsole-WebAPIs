@@ -4,7 +4,7 @@ namespace Employee.WebApi.Models.DataTransferObjects;
 
 public partial class EmployeeDTO
 {
-
+    public string EmployeeId { get; set; }
     [Required]
     [MaxLength(50)]
     public string FirstName { get; set; } 
@@ -27,13 +27,15 @@ public partial class EmployeeDTO
 
     public string ProfileImage { get; set; }
 
-    public string JobTitle { get; set; }
-    public string Department {  get; set; }
-    public string Location { get; set; }
-    [Required]
-   // public int RoleDepartmentLocationId { get; set; }
+    //public int RoleId { get; set; }
 
-    public int? ManagerId { get; set; }
+    //public int DepartmentId {  get; set; }
+
+    //public int LocationId { get; set; }
+
+    public int RoleDepartmentLocationId { get; set; }
+
+    public string? ManagerId { get; set; }
 
     public int? ProjectId { get; set; }
 

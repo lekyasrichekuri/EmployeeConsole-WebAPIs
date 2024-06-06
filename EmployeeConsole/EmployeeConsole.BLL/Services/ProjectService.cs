@@ -1,7 +1,7 @@
 ﻿using Employee.WebApi.DAL.Interfaces;
 using Employee.WebApi.BLL.Interfaces;
 using Employee.WebApi.Models.DataTransferObjects;
-using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Model;
+using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
 using AutoMapper;
 namespace Employee.WebApi.BLL.Interfaces
 {

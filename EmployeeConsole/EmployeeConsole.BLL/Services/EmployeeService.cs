@@ -1,7 +1,7 @@
 ﻿using Employee.WebApi.DAL.Interfaces;
 using Employee.WebApi.BLL.Interfaces;
 using Employee.WebApi.Models.DataTransferObjects;
-using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Model;
+using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
 using AutoMapper;
 
 namespace Employee.WebApi.BLL.Services
@@ -45,7 +45,7 @@ namespace Employee.WebApi.BLL.Services
             return _dbService.UpdateEmployee(employee);
         }
 
-        public EmployeeDTO DisplayEmpDetails(int employeeId)
+        public EmployeeDTO DisplayEmpDetails(string employeeId)
         {
             var employee = _dbService.DisplayEmployeeDetails(employeeId);
             return _mapper.Map<EmployeeDTO>(employee);
@@ -57,7 +57,7 @@ namespace Employee.WebApi.BLL.Services
             return _mapper.Map<List<EmployeeDTO>>(employee);
         }
 
-        public bool DeleteEmployee(int employeeId)
+        public bool DeleteEmployee(string employeeId)
         {
             return _dbService.DeleteEmployee(employeeId);
         }

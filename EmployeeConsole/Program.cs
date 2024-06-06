@@ -3,7 +3,7 @@ using Employee.WebApi.BLL.MappingProfiles;
 using Employee.WebApi.BLL.Services;
 using Employee.WebApi.DAL.Interfaces;
 using Employee.WebApi.DAL.Services;
-using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Model;
+using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);

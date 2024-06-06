@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Model;
+namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
 
 public partial class Project
 {

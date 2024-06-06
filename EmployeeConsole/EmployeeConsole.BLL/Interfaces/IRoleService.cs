@@ -7,5 +7,6 @@ namespace Employee.WebApi.BLL.Interfaces
         public bool IsRoleNameExists(string roleName);
         public bool AddRole(RoleDTO roleDTO);
         public List<RoleDTO> DisplayAll();
+        public bool AddRoleDeptLoc(RoleDTO roleDTO);
     }
 }

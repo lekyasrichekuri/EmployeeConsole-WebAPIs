@@ -25,11 +25,18 @@ namespace Employee.WebApi.Controllers
                 return BadRequest("Role Name cannot be empty");
 
             if (_roleService.IsRoleNameExists(role.RoleName))
-                return Conflict($"Role '{role.RoleName}' already exists");
+            {
+                if (_roleService.AddRoleDeptLoc(role))
+                    return Ok("Added Successfully");
+                else
+                    return BadRequest("Already exists");
+            }
+            else
+            {
+                bool a = _roleService.AddRole(role);
+                return Ok("Role added successfully");
+            }
 
-            bool a = _roleService.AddRole(role);
-
-            return Ok("Role added successfully");
         }
 
         // GET: api/Role

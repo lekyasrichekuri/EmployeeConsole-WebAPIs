@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Model;
+namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
 
-public partial class Role
+public partial class Location
 {
     public int Id { get; set; }
 
-    public string RoleName { get; set; } = null!;
+    public string LocationName { get; set; } = null!;
 
     public bool? IsDeleted { get; set; }
 
