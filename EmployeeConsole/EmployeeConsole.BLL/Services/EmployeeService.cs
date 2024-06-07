@@ -19,8 +19,12 @@ namespace Employee.WebApi.BLL.Services
 
         public bool AddEmployee(EmployeeDTO employeeDto)
         {
-            var employee = _mapper.Map<Employeee>(employeeDto);
-            return _dbService.AddEntity(employee);
+            if (!_dbService.IsEmployeeIdExists(employeeDto.EmployeeId))
+            {
+                var employee = _mapper.Map<Employeee>(employeeDto);
+                return _dbService.AddEntity(employee);
+            }
+            return false;
         }
 
         public List<EmployeeDTO> DisplayEmployees()
@@ -29,26 +33,25 @@ namespace Employee.WebApi.BLL.Services
             return _mapper.Map<List<EmployeeDTO>>(employees);
         }
 
-        //public bool UpdateEmployeeDetails(EmployeeDTO employeeDto)
-        //{
-        //    if (_dbService.IsEmployeeIdExists(employeeDto.EmployeeId))
-        //    {
-        //        var employee = _mapper.Map<Employeee>(employeeDto);
-        //        return _dbService.UpdateEmployee(employee);
-        //    }
-        //    return false;
-        //}
-
         public bool UpdateEmployeeDetails(EmployeeDTO employeeDto)
         {
-            var employee = _mapper.Map<Employeee>(employeeDto);
-            return _dbService.UpdateEmployee(employee);
+            if (_dbService.IsEmployeeIdExists(employeeDto.EmployeeId))
+            {
+                var employee = _mapper.Map<Employeee>(employeeDto);
+                return _dbService.UpdateEmployee(employee);
+            }
+            return false;
         }
+
 
         public EmployeeDTO DisplayEmpDetails(string employeeId)
         {
-            var employee = _dbService.DisplayEmployeeDetails(employeeId);
-            return _mapper.Map<EmployeeDTO>(employee);
+            if (_dbService.IsEmployeeIdExists(employeeId))
+            {
+                var employee = _dbService.DisplayEmployeeDetails(employeeId);
+                return _mapper.Map<EmployeeDTO>(employee);
+            }
+            return null;
         }
 
         public List<EmployeeDTO> DisplayEmpDetails(string firstName, string lastName)

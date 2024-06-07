@@ -32,7 +32,7 @@ namespace Employee.WebApi.Controllers
         {
             var employee = _employeeService.DisplayEmpDetails(id);
             if (employee == null)
-                return NotFound();
+                return NotFound("Employee doesn't exists");
             return Ok(employee);
         }
 
@@ -68,7 +68,7 @@ namespace Employee.WebApi.Controllers
             if (success)
                 return Ok("Employee added successfully");
             else
-                return BadRequest("Employee not added successfully");
+                return BadRequest($"Employee already exists");
         }
         
         // PUT api/Employee/5

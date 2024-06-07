@@ -10,12 +10,12 @@ namespace Employee.WebApi.DAL.Services
             _context = context;
         }
 
-        //public bool IsEmployeeIdExists(int employeeId)
-        //{
-        //    if (_context.Employees.FirstOrDefault(e => e.EmployeeId == employeeId) != null)
-        //        return true;
-        //    return false;
-        //}
+        public bool IsEmployeeIdExists(string employeeId)
+        {
+            if (_context.Employees.FirstOrDefault(e => e.EmployeeId == employeeId) != null)
+                return true;
+            return false;
+        }
 
         public bool UpdateEmployee(Employeee employee)
         {
