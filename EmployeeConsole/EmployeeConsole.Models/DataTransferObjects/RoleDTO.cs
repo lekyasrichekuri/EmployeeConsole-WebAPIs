@@ -14,8 +14,12 @@ public partial class RoleDTO
     [Required]
     public int DepartmentId { get; set; }
 
+    public string DepartmentName { get; set; }
+
     [Required]
     public int LocationId { get; set; }
+
+    public string LocationName { get; set; }
 
     public string RoleDescription { get; set; }
 

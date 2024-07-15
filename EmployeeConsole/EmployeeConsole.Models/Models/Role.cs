@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
+namespace EmployeeConsole_WebAPIs.EmployeeConsole.Models.Models;
 
 public partial class Role
 {

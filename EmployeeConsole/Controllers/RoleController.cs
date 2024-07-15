@@ -34,7 +34,10 @@ namespace Employee.WebApi.Controllers
             else
             {
                 bool a = _roleService.AddRole(role);
-                return Ok("Role added successfully");
+                if (a)
+                    return Ok("Role added successfully");
+                else
+                    return BadRequest("Role not added");
             }
 
         }

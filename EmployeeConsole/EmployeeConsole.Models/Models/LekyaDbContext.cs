@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
+namespace EmployeeConsole_WebAPIs.EmployeeConsole.Models.Models;
 
 public partial class LekyaDbContext : DbContext
 {
@@ -49,7 +49,7 @@ public partial class LekyaDbContext : DbContext
 
         modelBuilder.Entity<Employeee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF17FC84C87");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF19673B1ED");
 
             entity.ToTable("Employee");
 
@@ -83,20 +83,20 @@ public partial class LekyaDbContext : DbContext
 
             entity.HasOne(d => d.Manager).WithMany(p => p.InverseManager)
                 .HasForeignKey(d => d.ManagerId)
-                .HasConstraintName("FK__Employee__Manage__39237A9A");
+                .HasConstraintName("FK__Employee__Manage__4C364F0E");
 
             entity.HasOne(d => d.Project).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.ProjectId)
-                .HasConstraintName("FK__Employee__Projec__382F5661");
+                .HasConstraintName("FK__Employee__Projec__4B422AD5");
 
             entity.HasOne(d => d.RoleDepartmentLocation).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.RoleDepartmentLocationId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Employee__RoleDe__373B3228");
+                .HasConstraintName("FK__Employee__RoleDe__4A4E069C");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.StatusId)
-                .HasConstraintName("FK__Employee__Status__36470DEF");
+                .HasConstraintName("FK__Employee__Status__4959E263");
         });
 
         modelBuilder.Entity<Location>(entity =>
@@ -133,29 +133,30 @@ public partial class LekyaDbContext : DbContext
 
         modelBuilder.Entity<RoleDepartmentLocation>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__RoleDepa__3214EC0731499147");
+            entity.HasKey(e => e.Id).HasName("PK__RoleDepa__3214EC07A9923CB7");
 
             entity.ToTable("RoleDepartmentLocation");
 
             entity.Property(e => e.IsDeleted).HasDefaultValue(false);
             entity.Property(e => e.RoleDescription)
                 .HasMaxLength(50)
-                .IsUnicode(false);
+                .IsUnicode(false)
+                .HasDefaultValueSql("(NULL)");
 
             entity.HasOne(d => d.Department).WithMany(p => p.RoleDepartmentLocations)
                 .HasForeignKey(d => d.DepartmentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RoleDepar__Depar__0D44F85C");
+                .HasConstraintName("FK__RoleDepar__Depar__44952D46");
 
             entity.HasOne(d => d.Location).WithMany(p => p.RoleDepartmentLocations)
                 .HasForeignKey(d => d.LocationId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RoleDepar__Locat__0E391C95");
+                .HasConstraintName("FK__RoleDepar__Locat__4589517F");
 
             entity.HasOne(d => d.Role).WithMany(p => p.RoleDepartmentLocations)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RoleDepar__RoleI__0C50D423");
+                .HasConstraintName("FK__RoleDepar__RoleI__43A1090D");
         });
 
         modelBuilder.Entity<Status>(entity =>

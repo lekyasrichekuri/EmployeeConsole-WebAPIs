@@ -1,7 +1,7 @@
 ﻿using Employee.WebApi.DAL.Interfaces;
 using Employee.WebApi.BLL.Interfaces;
 using Employee.WebApi.Models.DataTransferObjects;
-using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
+using EmployeeConsole_WebAPIs.EmployeeConsole.Models.Models;
 using AutoMapper;
 
 namespace Employee.WebApi.BLL.Services
@@ -19,17 +19,28 @@ namespace Employee.WebApi.BLL.Services
 
         public bool AddEmployee(EmployeeDTO employeeDto)
         {
-            if (!_dbService.IsEmployeeIdExists(employeeDto.EmployeeId))
+            try
             {
-                var employee = _mapper.Map<Employeee>(employeeDto);
-                return _dbService.AddEntity(employee);
+                if (!_dbService.IsEmployeeIdExists(employeeDto.EmployeeId))
+                {
+                    var employee = _mapper.Map<Employeee>(employeeDto);
+                    return _dbService.AddEmployee(employee);
+                }
+                else
+                {
+                    return false;
+                }
             }
-            return false;
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
 
         public List<EmployeeDTO> DisplayEmployees()
         {
-            var employees = _dbService.DisplayAll<Employeee>();
+            var employees = _dbService.DisplayEmployees();
             return _mapper.Map<List<EmployeeDTO>>(employees);
         }
 
@@ -57,6 +68,13 @@ namespace Employee.WebApi.BLL.Services
         public List<EmployeeDTO> DisplayEmpDetails(string firstName, string lastName)
         {
             var employee = _dbService.DisplayEmployeeDetails(firstName,lastName);
+            return _mapper.Map<List<EmployeeDTO>>(employee);
+        }
+
+
+        public List<EmployeeDTO> DisplayEmpDetailsOnFirstLetter(string letter)
+        {
+            var employee = _dbService.DisplayEmpDetailsOnFirstLetter(letter);
             return _mapper.Map<List<EmployeeDTO>>(employee);
         }
 

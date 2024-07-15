@@ -9,6 +9,7 @@ namespace Employee.WebApi.BLL.Interfaces
         public bool UpdateEmployeeDetails(EmployeeDTO employee);
         public EmployeeDTO DisplayEmpDetails(string employeeId);
         public List<EmployeeDTO> DisplayEmpDetails(string firstName, string lastName);
+        public List<EmployeeDTO> DisplayEmpDetailsOnFirstLetter(string letter);
         public bool DeleteEmployee(string employeeId);
     }
 }

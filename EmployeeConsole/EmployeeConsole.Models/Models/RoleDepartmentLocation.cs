@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
+namespace EmployeeConsole_WebAPIs.EmployeeConsole.Models.Models;
 
 public partial class RoleDepartmentLocation
 {
@@ -11,7 +11,7 @@ public partial class RoleDepartmentLocation
 
     public int DepartmentId { get; set; }
 
-    public string RoleDescription { get; set; } = null!;
+    public string? RoleDescription { get; set; }
 
     public int LocationId { get; set; }
 

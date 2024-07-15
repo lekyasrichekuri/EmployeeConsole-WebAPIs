@@ -1,7 +1,7 @@
 ﻿using Employee.WebApi.DAL.Interfaces;
 using Employee.WebApi.BLL.Interfaces;
 using Employee.WebApi.Models.DataTransferObjects;
-using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
+using EmployeeConsole_WebAPIs.EmployeeConsole.Models.Models;
 using AutoMapper;
 namespace Employee.WebApi.BLL.Interfaces
 {
@@ -18,7 +18,7 @@ namespace Employee.WebApi.BLL.Interfaces
 
         public List<ProjectDTO> DisplayAll()
         {
-            var projects = _dbService.DisplayAll<Project>();
+            var projects = _dbService.DisplayProjects();
             return _mapper.Map<List<ProjectDTO>>(projects);
         }
 

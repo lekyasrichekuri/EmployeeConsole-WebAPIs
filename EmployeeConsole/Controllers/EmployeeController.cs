@@ -60,6 +60,16 @@ namespace Employee.WebApi.Controllers
             return NotFound("Employee not found");
         }
 
+        [HttpGet("{letter}")]
+        public ActionResult<EmployeeDTO> GetEmployeeByLetter(string letter)
+        {
+            var employee = _employeeService.DisplayEmpDetailsOnFirstLetter(letter);
+            if (employee == null) 
+                return NotFound("Employee not found");
+            else 
+                return Ok(employee);
+
+        }
         // POST api/Employee
         [HttpPost]
         public ActionResult<string> AddEmployee(EmployeeDTO employee)

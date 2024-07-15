@@ -27,18 +27,27 @@ public partial class EmployeeDTO
 
     public string ProfileImage { get; set; }
 
-    //public int RoleId { get; set; }
+    public int RoleId { get; set; }
 
-    //public int DepartmentId {  get; set; }
+    public string ?RoleName { get; set; }
 
-    //public int LocationId { get; set; }
+    public int DepartmentId { get; set; }
+
+    public string ?DepartmentName { get; set; }
+
+    public int LocationId { get; set; }
+
+    public string ?LocationName { get; set; }
 
     public int RoleDepartmentLocationId { get; set; }
 
     public string? ManagerId { get; set; }
+    public string ?ManagerName { get; set; }
 
-    public int? ProjectId { get; set; }
+    public int ProjectId { get; set; }
+    public string ?ProjectName { get; set; }
 
-    public int? StatusId { get; set; }
+    public int StatusId { get; set; }
+    public string ?StatusName { get; set; }
 
 }

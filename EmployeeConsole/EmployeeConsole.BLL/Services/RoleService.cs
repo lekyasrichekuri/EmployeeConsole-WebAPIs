@@ -1,7 +1,7 @@
 ﻿using Employee.WebApi.DAL.Interfaces;
 using Employee.WebApi.BLL.Interfaces;
 using Employee.WebApi.Models.DataTransferObjects;
-using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
+using EmployeeConsole_WebAPIs.EmployeeConsole.Models.Models;
 using AutoMapper;
 
 namespace Employee.WebApi.BLL.Services
@@ -22,7 +22,7 @@ namespace Employee.WebApi.BLL.Services
             List<Role> roles = null;
             try
             {
-                roles = _dbService.DisplayAll<Role>();
+                roles = _dbService.DisplayRoles();
             }
             catch (Exception e)
             {

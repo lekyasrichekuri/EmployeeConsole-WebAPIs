@@ -1,7 +1,7 @@
 ﻿using Employee.WebApi.DAL.Interfaces;
 using Employee.WebApi.BLL.Interfaces;
 using Employee.WebApi.Models.DataTransferObjects;
-using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
+using EmployeeConsole_WebAPIs.EmployeeConsole.Models.Models;
 using AutoMapper;
 
 namespace Employee.WebApi.BLL.Services
@@ -19,7 +19,7 @@ namespace Employee.WebApi.BLL.Services
 
         public List<LocationDTO> DisplayAll()
         {
-            var locations = _dbService.DisplayAll<Location>();
+            var locations = _dbService.DisplayLocations();
             return _mapper.Map<List<LocationDTO>>(locations);
         }
 

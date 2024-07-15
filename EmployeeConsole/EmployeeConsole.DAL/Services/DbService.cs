@@ -1,5 +1,6 @@
 ﻿using Employee.WebApi.DAL.Interfaces;
-using EmployeeConsole_WebAPIs.Employee.WebApi.Models.Models;
+using EmployeeConsole_WebAPIs.EmployeeConsole.Models.Models;
+using Microsoft.EntityFrameworkCore;
 namespace Employee.WebApi.DAL.Services
 {
     public class DbService : IDbService
@@ -82,12 +83,45 @@ namespace Employee.WebApi.DAL.Services
                 .Where(e =>
                      e.FirstName.ToUpper().Contains(firstName.ToUpper()) ||
                      e.LastName.ToUpper().Contains(lastName.ToUpper()))
+                .Include(e => e.RoleDepartmentLocation)
+                    .ThenInclude(rdl => rdl.Role)
+                .Include(e => e.RoleDepartmentLocation)
+                    .ThenInclude(rdl => rdl.Department)
+                .Include(e => e.RoleDepartmentLocation)
+                    .ThenInclude(rdl => rdl.Location)
+                .Include(e => e.Project)
+                .Include(e => e.Status)
                 .ToList();
                 return employees;
             }
             catch (Exception e)
             {
                 Console.WriteLine($"An error occurred while displaying employee details: {e.Message}");
+                return null;
+            }
+        }
+
+
+        public List<Employeee> DisplayEmpDetailsOnFirstLetter(string letter)
+        {
+            try
+            {
+                var employees = _context.Employees
+                    .Where(e => e.FirstName.ToUpper().StartsWith(letter))
+                    .Include(e => e.RoleDepartmentLocation)
+                        .ThenInclude(rdl => rdl.Role)
+                    .Include(e => e.RoleDepartmentLocation)
+                        .ThenInclude(rdl => rdl.Department)
+                    .Include(e => e.RoleDepartmentLocation)
+                        .ThenInclude(rdl => rdl.Location)
+                    .Include(e => e.Project)
+                    .Include(e => e.Status)
+                    .ToList();
+                return employees;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine($"An error has occurred while displaying employee details: {e.Message}");
                 return null;
             }
         }
@@ -117,20 +151,126 @@ namespace Employee.WebApi.DAL.Services
             }
         }
 
-        public List<TEntity> DisplayAll<TEntity>() where TEntity : class
+        public List<Employeee> DisplayEmployees()
         {
-            var entities = new List<TEntity>();
             try
             {
-                entities = _context.Set<TEntity>().ToList();
+                return _context.Employees
+                               .Include(e => e.RoleDepartmentLocation)
+                                   .ThenInclude(rdl => rdl.Role)
+                               .Include(e => e.RoleDepartmentLocation)
+                                   .ThenInclude(rdl => rdl.Department)
+                               .Include(e => e.RoleDepartmentLocation)
+                                   .ThenInclude(rdl => rdl.Location)
+                               .Include(e => e.Project)
+                               .Include(e => e.Status)
+                               .ToList();
             }
             catch (Exception e)
             {
-                Console.WriteLine($"An error occurred while displaying {typeof(TEntity).Name}s: {e.Message}");
+                Console.WriteLine($"An error occurred while displaying employees: {e.Message}");
+                return null;
             }
-            return entities;
         }
 
+        public List<Role> DisplayRoles()
+        {
+            try
+            {
+                return _context.Roles
+                    .ToList();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine($"An error occurred while displaying roles:{e.Message}");
+                return null;
+            }
+        }
+
+        public List<Department> DisplayDepartments()
+        {
+            try
+            {
+                return _context.Departments
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred while displaying departments:{e.Message}");
+                return null;
+            }
+        }
+        public List<Location> DisplayLocations()
+        {
+            try
+            {
+                return _context.Locations
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred while displaying locations:{e.Message}");
+                return null;
+            }
+        }
+
+        public List<Project> DisplayProjects()
+        {
+            try
+            {
+                return _context.Projects
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred while displaying projects:{e.Message}");
+                return null;
+            }
+        }
+        public List<Status> DisplayStatus()
+        {
+            try
+            {
+                return _context.Statuses
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred while displaying status:{e.Message}");
+                return null;
+            }
+        }
+
+
+
+        /*        public List<TEntity> DisplayAll<TEntity>() where TEntity : class
+                {
+                    var entities = new List<TEntity>();
+                    try
+                    {
+                        entities = _context.Set<TEntity>().ToList();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"An error occurred while displaying {typeof(TEntity).Name}s: {e.Message}");
+                    }
+                    return entities;
+                }*/
+
+        public bool AddEmployee(Employeee employee)
+        {
+            try
+            {
+                _context.Employees.Add(employee);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred while adding the employee: {e.Message}");
+                return false;
+            }
+        }
         public bool AddEntity<TEntity>(TEntity entity) where TEntity : class
         {
             try
